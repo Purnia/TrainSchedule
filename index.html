@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <link href='assets/css/style.css'>
 </head>
 
 <body>
@@ -23,8 +24,9 @@
                     <h3 class="title">Current Train Schedule</h3>
                 </div>
             </div>
-            <div class="panel panel-success">
-                <thead>
+        
+                <table class="table">
+                    <thead>
                     <tr>
                         <th>Train Name</th>
                         <th>Destination</th>
@@ -33,10 +35,24 @@
                         <th>Minutes Away</th>
                     </tr>
                 </thead>
-                <tbody>
+                    <tbody class="train-info">
 
-                </tbody>
-            </table>
+                    </tbody>
+                    <!-- <tr>
+                        <td>train x</td>
+                        <td>destination x</td>
+                        <td>frequency x</td>
+                        <td>arrival time x</td>
+                        <td>minutes away x</td>
+                    </tr>
+                    <tr>
+                            <td>train x</td>
+                            <td>destination x</td>
+                            <td>frequency x</td>
+                            <td>arrival time x</td>
+                            <td>minutes away x</td>
+                        </tr> -->
+                </table>     
 
         </div>
 
@@ -51,8 +67,8 @@
         </div>
 
             <!-- Add train form -->
-            <form>
-                <div class="form-input">
+            <div class="form-group form-group-lg" >
+                <div class="form-input form-input-lg">
                     <label for="train-name">Train Name</label> <br>
                     <input id="train-name" type="text">
                 </div>
@@ -67,7 +83,7 @@
                     <div class="form-input">
                             <label for="frequency-input">Frequency (min)</label><br>
                             <input id="frequency-input" type="text">
-                        </div>
+                        </div> <br>
                         <button class="btn btn-success" id="add-train-btn" type="submit">Submit</button>
             </form>
 

@@ -14,6 +14,7 @@ $(document).ready(function(){
   firebase.initializeApp(config);
   var dataRef = firebase.database();
 
+  //initial values
 var name="";
 var destination="";
 var firstTrain=0;
@@ -23,6 +24,7 @@ var frequency=0;
 
 $("#add-train-btn").on("click", function(event){
     event.preventDefault();
+    //grab values from text boxes
     name=$("#train-name").val().trim();
     destination=$("#destination-input").val().trim();
     firstTrain=$("#firstTrain-input").val().trim();
@@ -38,18 +40,18 @@ dataRef.ref().push({
 
 });
 
-dataRef.ref().on("child_added", function(snapshot){
-    console.log(snapshot.val());
-      console.log(snapshot.val().name);
-      console.log(snapshot.val().destination);
-      console.log(snapshot.val().firstTrain);
-      console.log(snapshot.val().frequency);
+dataRef.ref().on("child_added", function(childSnapshot){
+    console.log(childSnapshot.val());
+      var trainName =childSnapshot.val().name;
+      var destName =childSnapshot.val().destination;
+      var initialTrain =childSnapshot.val().firstTrain;
+      var trainFreq=childSnapshot.val().frequency;
 
-      var frequency;
-      var firstTrain = "12:00";
+      var frequency= 10;
+      var initialTrain = "12:00";
 
       // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(firstTrain, "HH:mm").subtract(1, "years");
+    var firstTimeConverted = moment(initialTrain, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
 
     // Current Time
@@ -58,11 +60,23 @@ dataRef.ref().on("child_added", function(snapshot){
 
     // Difference between the times
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
+    console.log("DIFFERENCE IN TIME: " + moment(diffTime));
 
     // Time apart (remainder)
     var tRemainder = diffTime % frequency;
     console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+     // Next Train
+     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+     //add to html
+
+     $("#train-info").append("<tr><td>" + trainName + "</td><td>" + destName + "</td><td>"  + trainFreq + "</td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 
 
 
