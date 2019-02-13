@@ -75,8 +75,10 @@ dataRef.ref().on("child_added", function(childSnapshot){
      console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
      //add to html
+     //this doesnt seem to be working and im not sure why. getting all the results in console log but just not being able to push into html
 
-     $("#train-info").append("<tr><td>" + trainName + "</td><td>" + destName + "</td><td>"  + trainFreq + "</td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
+     $(".train-info").append("<tr><td>" + trainName + "</td><td>" + destName + "</td><td>"  + trainFreq + "</td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
+     console.log(trainName, destName, trainFreq );
 
 
 
