@@ -1,7 +1,7 @@
 body{
     background-image: url("../images/pexels-photo-374684\ \(1\).jpeg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     opacity:0.8;
 
 }
